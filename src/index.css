@@ -1,0 +1,18 @@
+/* :root {
+  --color-primary1:
+} */
+
+@font-face {
+  font-family: Cabin;
+  src: url("./assets/fonts/Cabin.woff2") format("woff2");
+  src: url("./assets/fonts/Cabin.woff") format("woff");
+  src: url("./assets/fonts/Cabin.ttf") format("truetype");
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Cabin, sans-serif;
+}
