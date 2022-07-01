@@ -138,6 +138,27 @@ class CardRyM extends HTMLElement {
     this.render();
   }
 
+  // util for xmlHttpRequest
+  fetchData(urlApi, callback) {
+    const xhttp = new XMLHttpRequest(); // Referencia del objeto que necesitamos.
+    /* Hacemos un llamado a una url */
+    xhttp.open('GET', urlApi, true); // El último parámetro hace referencia al asincronismo. Por defecto es true, pero lo ponemos para referencia.
+    /* 'Escuchamos' lo que hará la conexión (Referente a los 5 estados que comenta el profesor) */
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState === 4) { // Validar si la petición se completó. (Estado 5 pero contamos desde 0 como en un array)
+        if (xhttp.status === 200) { // Validar el estado en el que se encuentra la petición. (200 = todo bien, 400 = no encontró algo, 500 = error en el servidor)
+          /* Regresar el callback (primer valor que pasamos es el error y el segundo es el resultado del llamado a la API) */
+          callback(null, JSON.parse(xhttp.responseText)); // Como el resultado viene en formato de texto de JSON, lo tenemos que convertir a un objeto para trabajar con él
+        } else {
+          /* Definimos y retornamos un error en caso de obtenerlo (buena práctica) */
+          const error = new Error('Error ' + urlApi);
+          return callback(error, null);
+        }
+      }
+    };
+    xhttp.send(); // Enviamos la petición.
+  }
+
   getDataByCallbacks() {
     this.fetchData(API, (err, data) => {
       if (err) throw new Error(err);
@@ -148,6 +169,30 @@ class CardRyM extends HTMLElement {
       });
     });
   }
+
+  // util for the promises process to convert the response into json
+  loadJson(url) {
+    return fetch(url)
+      .then(response => response.json())
+      .catch(err => console.log(new Error(err)));
+  }
+
+  getDataByPromises() {
+    this.loadJson(API)
+      .then(data => this.loadJson(`${data.characters}/${this.idCharacter}`))
+      .then(dataCharacter => this.renderData(dataCharacter))
+      .catch(err => console.log(new Error(err)));
+  }
+
+  // async getDataByAsyncAwait() {
+  //   try {
+  //     const data = await this.loadJson(API);
+  //     const dataCharacter = await this.loadJson(`${data.characters}/${this.idCharacter}`);
+  //     this.renderData(dataCharacter);
+  //   } catch (err) {
+  //     throw new Error(err);
+  //   }
+  // }
 
   renderData(characterData) {
     const article = this.shadowRoot.querySelector('.card');
@@ -179,27 +224,6 @@ class CardRyM extends HTMLElement {
         </div>
       </div>
     `;
-  }
-
-  // util for xmlHttpRequest
-  fetchData(urlApi, callback) {
-    const xhttp = new XMLHttpRequest(); // Referencia del objeto que necesitamos.
-    /* Hacemos un llamado a una url */
-    xhttp.open('GET', urlApi, true); // El último parámetro hace referencia al asincronismo. Por defecto es true, pero lo ponemos para referencia.
-    /* 'Escuchamos' lo que hará la conexión (Referente a los 5 estados que comenta el profesor) */
-    xhttp.onreadystatechange = () => {
-      if (xhttp.readyState === 4) { // Validar si la petición se completó. (Estado 5 pero contamos desde 0 como en un array)
-        if (xhttp.status === 200) { // Validar el estado en el que se encuentra la petición. (200 = todo bien, 400 = no encontró algo, 500 = error en el servidor)
-          /* Regresar el callback (primer valor que pasamos es el error y el segundo es el resultado del llamado a la API) */
-          callback(null, JSON.parse(xhttp.responseText)); // Como el resultado viene en formato de texto de JSON, lo tenemos que convertir a un objeto para trabajar con él
-        } else {
-          /* Definimos y retornamos un error en caso de obtenerlo (buena práctica) */
-          const error = new Error('Error ' + urlApi);
-          return callback(error, null);
-        }
-      }
-    };
-    xhttp.send(); // Enviamos la petición.
   }
 
   render() {

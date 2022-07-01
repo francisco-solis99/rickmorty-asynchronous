@@ -23,6 +23,7 @@ html {
 
 body {
   font-family: Cabin, sans-serif;
+  background-color: #ffe9f4;
 }
 
 #app {
@@ -152,7 +153,6 @@ body {
 
 .main {
   width: 100%;
-  background-color: #ffe9f4;
 }
 
 .cards-section {

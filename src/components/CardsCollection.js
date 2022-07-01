@@ -47,7 +47,7 @@ class CardsCollection extends HTMLElement {
     cards.forEach(card => {
       if (this.method === 'callbacks') card.getDataByCallbacks();
       if (this.method === 'promises') card.getDataByPromises();
-      if (this.method === 'asyncawait') card.getDataByAsyncAwait();
+      if (this.method === 'async-await') card.getDataByAsyncAwait();
     });
   }
 
