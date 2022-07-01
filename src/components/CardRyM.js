@@ -184,15 +184,15 @@ class CardRyM extends HTMLElement {
       .catch(err => console.log(new Error(err)));
   }
 
-  // async getDataByAsyncAwait() {
-  //   try {
-  //     const data = await this.loadJson(API);
-  //     const dataCharacter = await this.loadJson(`${data.characters}/${this.idCharacter}`);
-  //     this.renderData(dataCharacter);
-  //   } catch (err) {
-  //     throw new Error(err);
-  //   }
-  // }
+  async getDataByAsyncAwait() {
+    try {
+      const data = await this.loadJson(API);
+      const dataCharacter = await this.loadJson(`${data.characters}/${this.idCharacter}`);
+      this.renderData(dataCharacter);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 
   renderData(characterData) {
     const article = this.shadowRoot.querySelector('.card');
