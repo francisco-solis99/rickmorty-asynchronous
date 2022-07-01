@@ -1,3 +1,5 @@
+const API = 'https://rickandmortyapi.com/api';
+
 class CardRyM extends HTMLElement {
   constructor() {
     super();
@@ -11,7 +13,14 @@ class CardRyM extends HTMLElement {
     }
 
     .card {
-      // opacity: .7;
+      width: 320px;
+      height: 80px;
+      margin: 0 auto;
+      background: papayawhip;
+    }
+
+    .skeleton {
+      opacity: .7;
       animation: skeleton-loading 1s linear infinite alternate;
     }
 
@@ -28,8 +37,14 @@ class CardRyM extends HTMLElement {
   }
 
   connectedCallback() {
-    this.data = JSON.parse(this.getAttribute('characterData'));
+    this.idCharacter = this.getAttribute('idCharacter');
     this.render();
+  }
+
+  getDataByCallbacks() {
+    console.log('cargando la data de la card ' + this.idCharacter);
+    const article = this.shadowRoot.querySelector('.card');
+    console.log(article);
   }
 
   render() {
@@ -38,21 +53,21 @@ class CardRyM extends HTMLElement {
     <article class="card">
       <div class="card-image">
         <figure class="image-wrapper">
-          <img src="${this.data.image}" alt="Character Image" class="image">
+          <img src="" alt="Character Image" class="image skeleton">
         </figure>
       </div>
       <div class="card-info">
-        <h3 class="character-name">${this.data.name}</h3>
+        <h3 class="character-name"></h3>
 
         <div class="character-info">
-          <p><strong>Especies: ${this.data.especies} </strong></p>
-          <p><strong>Gender: ${this.data.gender}</strong></p>
-          <p><strong>Origin:${this.data.origin.name}</strong></p>
+          <p><strong></strong></p>
+          <p><strong></strong></p>
+          <p><strong></strong></p>
         </div>
 
         <div class="character-tags">
-          <p>${this.data.status}</p>
-          <p>${this.data.origin.name}</p>
+          <p></p>
+          <p></p>
         </div>
     </article>`;
   }
