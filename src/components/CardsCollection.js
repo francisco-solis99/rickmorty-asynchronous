@@ -11,6 +11,18 @@ class CardsCollection extends HTMLElement {
     :host {
 
     }
+    .collection {
+      display: grid;
+      grid-template-columns: repeat( auto-fit, minmax(265px, 1fr));
+      gap: 30px 10px;
+    }
+
+    @media screen and (min-width: 768px) {
+      .collection {
+        grid-template-columns: repeat( auto-fit, minmax(340px, 1fr));
+        gap: 30px 0;
+      }
+    }
   `;
   }
 

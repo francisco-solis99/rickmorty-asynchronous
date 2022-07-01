@@ -9,19 +9,116 @@ class CardRyM extends HTMLElement {
   static get styles() {
     return /* css */`
     :host {
-
     }
 
     .card {
-      width: 320px;
-      height: 80px;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      height: 100%;
       margin: 0 auto;
-      background: papayawhip;
+      min-height: 200px;
     }
+
+    /* card image */
+
+    .card-image {
+      width: 70%;
+      margin: 0 auto;
+      padding: 25px 20px;
+      box-sizing: border-box;
+      border-radius: 20px 20px 0 0;
+      background-color: #3E3A3A;
+      text-align: center;
+    }
+
+    .image-wrapper {
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+    }
+
+    .image {
+      height: 100%;
+      width:100%;
+      min-height: 100px;
+      object-fit: cover;
+    }
+
+    /* card info*/
+    .card-info {
+      width: 80%;
+      height: 100%;
+      margin: 0 auto;
+      margin-top: -20px;
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: #fff;
+      border: 2px solid #000;
+    }
+
+    .character-name {
+      margin: 0;
+      font-size: 2rem;
+      text-align: center
+    }
+
+    .card-info p {
+      font-size: 1.6rem;
+    }
+
+    .character-tags {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 0 10px;
+    }
+
+    .character-tag  {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 10px;
+      border-radius: 20px;
+      background-color: #D9D9D9;
+    }
+
+    .character-tag > p {
+      margin: 0;
+      margin-left: 8px;
+      font-size: 1.4rem;
+    }
+
+    .status-icon {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    .status-icon.green {
+      background-color: #91CF7B;
+    }
+
+    .status-icon.red {
+      background-color: #cf7b7b;
+    }
+
+    /*skeleton classes */
 
     .skeleton {
       opacity: .7;
       animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    .skeleton-text {
+      width:  100%;
+      height: .5rem;
+      margin-bottom: .25rem;
+      border-radius: .125rem;
     }
 
     @keyframes skeleton-loading  {
@@ -42,9 +139,67 @@ class CardRyM extends HTMLElement {
   }
 
   getDataByCallbacks() {
-    console.log('cargando la data de la card ' + this.idCharacter);
+    this.fetchData(API, (err, data) => {
+      if (err) throw new Error(err);
+
+      this.fetchData(`${data.characters}/${this.idCharacter}`, (err2, character) => {
+        if (err2) throw new Error(err);
+        this.renderData(character);
+      });
+    });
+  }
+
+  renderData(characterData) {
     const article = this.shadowRoot.querySelector('.card');
-    console.log(article);
+    const aliveIndicator = characterData.status.toLowerCase() === 'alive' ? 'green' : 'red';
+    article.innerHTML = `
+      <div class="card-image">
+        <figure class="image-wrapper">
+          <img src="${characterData.image}" alt="Character Image" class="image">
+        </figure>
+      </div>
+      <div class="card-info">
+        <h3 class="character-name">${characterData.name}</h3>
+
+        <div class="character-info">
+          <p><strong>Especies: </strong>${characterData.species}</p>
+          <p><strong>Gender: </strong>${characterData.gender}</p>
+          <p><strong>Origin: </strong>${characterData.origin.name}</p>
+        </div>
+
+        <div class="character-tags">
+          <div class="character-tag">
+            <span class="status-icon ${aliveIndicator}"></span>
+            <p>${characterData.status}</p>
+            </div>
+          <div class="character-tag">
+            <img class="planet-icon" src="../assets/icons/planet.svg"></img>
+            <p>${characterData.location.name}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // util for xmlHttpRequest
+  fetchData(urlApi, callback) {
+    const xhttp = new XMLHttpRequest(); // Referencia del objeto que necesitamos.
+    /* Hacemos un llamado a una url */
+    xhttp.open('GET', urlApi, true); // El último parámetro hace referencia al asincronismo. Por defecto es true, pero lo ponemos para referencia.
+    /* 'Escuchamos' lo que hará la conexión (Referente a los 5 estados que comenta el profesor) */
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState === 4) { // Validar si la petición se completó. (Estado 5 pero contamos desde 0 como en un array)
+        if (xhttp.status === 200) { // Validar el estado en el que se encuentra la petición. (200 = todo bien, 400 = no encontró algo, 500 = error en el servidor)
+          /* Regresar el callback (primer valor que pasamos es el error y el segundo es el resultado del llamado a la API) */
+          callback(null, JSON.parse(xhttp.responseText)); // Como el resultado viene en formato de texto de JSON, lo tenemos que convertir a un objeto para trabajar con él
+        } else {
+          /* Definimos y retornamos un error en caso de obtenerlo (buena práctica) */
+          const error = new Error('Error ' + urlApi);
+          return callback(error, null);
+        }
+      }
+    };
+    xhttp.send(); // Enviamos la petición.
   }
 
   render() {
@@ -53,21 +208,21 @@ class CardRyM extends HTMLElement {
     <article class="card">
       <div class="card-image">
         <figure class="image-wrapper">
-          <img src="" alt="Character Image" class="image skeleton">
+          <div class="image skeleton"></div>
         </figure>
       </div>
       <div class="card-info">
-        <h3 class="character-name"></h3>
+        <h3 class="character-name skeleton skeleton-text"></h3>
 
         <div class="character-info">
-          <p><strong></strong></p>
-          <p><strong></strong></p>
-          <p><strong></strong></p>
+          <p class="skeleton skeleton-text"><strong></strong></p>
+          <p class="skeleton skeleton-text"><strong></strong></p>
+          <p class="skeleton skeleton-text"><strong></strong></p>
         </div>
 
         <div class="character-tags">
-          <p></p>
-          <p></p>
+          <p class="skeleton skeleton-text"></p>
+          <p class="skeleton skeleton-text"></p>
         </div>
     </article>`;
   }
