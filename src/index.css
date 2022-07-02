@@ -152,11 +152,16 @@ body {
 /* styles for the main where teh cards are */
 
 .main {
+  display: flex;
   width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 .cards-section {
   margin-top: 100px;
+  width: 100%;
+  position: absolute;
 
   & .cards-section-title {
     padding: 15px 10px;
@@ -166,6 +171,14 @@ body {
     color: #fff;
     background-color: #f36399;
   }
+}
+
+.cards-section:nth-child(2) {
+  transform: translateX(-100%);
+}
+
+.cards-section:nth-child(3) {
+  transform: translateX(-200%);
 }
 
 .cards-wrapper {

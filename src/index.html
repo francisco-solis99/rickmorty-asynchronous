@@ -10,30 +10,30 @@
 </head>
 <body>
   <div id="app">
-    <header class="header">
+    <header class="header" data-aos="fade-up">
       <h1 class="title">Rick and Morty API</h1>
       <img class="ship-vector" src="./assets/icons/ship.svg" alt="Ship vector 24x24">
     </header>
 
     <section class="content">
-      <aside class="scroll-nav">
+      <aside class="scroll-nav" data-aos="fade-up">
         <!-- This could be a component -->
         <nav class="navbar">
           <ul class="navbar-list">
             <li class="navbar-item">
-              <a href="#" class="navbar-link">
+              <a href="#callbacks" class="navbar-link">
                 <div class="navbar-point current"></div>
                 <span class="navbar-link-text">Callbacks</span>
               </a>
             </li>
             <li class="navbar-item">
-              <a href="#" class="navbar-link">
+              <a href="#promises" class="navbar-link">
                 <div class="navbar-point"></div>
                 <span class="navbar-link-text">Promises</span>
               </a>
             </li>
             <li class="navbar-item">
-              <a href="#" class="navbar-link">
+              <a href="#async-await" class="navbar-link">
                 <div class="navbar-point"></div>
                 <span class="navbar-link-text">Async/Await</span>
               </a>
@@ -41,20 +41,20 @@
           </ul>
         </nav>
       </aside>
-      <main class="main">
-        <section class="cards-section">
+      <main class="main" data-aos="fade-up">
+        <section class="cards-section" id="callbacks" data-aos="fade-left">
           <h2 class="cards-section-title">Callbacks</h2>
-          <div class="cards-wrapper">
+          <div class="cards-wrapper" data-aos="fade-left">
             <cards-collection idStart="1" idEnd="10" method="callbacks"></cards-collection>
           </div>
         </section>
-        <section class="cards-section">
-          <h2 class="cards-section-title">Promises</h2>
+        <section class="cards-section" id="promises">
+          <h2 class="cards-section-title" >Promises</h2>
           <div class="cards-wrapper">
             <cards-collection idStart="11" idEnd="20" method="promises"></cards-collection>
           </div>
         </section>
-        <section class="cards-section">
+        <section class="cards-section" id="async-await">
           <h2 class="cards-section-title">Async/Await</h2>
           <div class="cards-wrapper">
             <cards-collection idStart="21" idEnd="30" method="async-await"></cards-collection>
