@@ -16,48 +16,26 @@
     </header>
 
     <section class="content">
-      <aside class="scroll-nav" data-aos="fade-up">
-        <!-- This could be a component -->
-        <nav class="navbar">
-          <ul class="navbar-list">
-            <li class="navbar-item">
-              <a href="#callbacks" class="navbar-link">
-                <div class="navbar-point current"></div>
-                <span class="navbar-link-text">Callbacks</span>
-              </a>
-            </li>
-            <li class="navbar-item">
-              <a href="#promises" class="navbar-link">
-                <div class="navbar-point"></div>
-                <span class="navbar-link-text">Promises</span>
-              </a>
-            </li>
-            <li class="navbar-item">
-              <a href="#async-await" class="navbar-link">
-                <div class="navbar-point"></div>
-                <span class="navbar-link-text">Async/Await</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <aside class="scroll-nav"  data-aos="fade-right">
+        <spy-scroll></spy-scroll>
       </aside>
-      <main class="main" data-aos="fade-up">
-        <section class="cards-section" id="callbacks" data-aos="fade-left">
-          <h2 class="cards-section-title">Callbacks</h2>
-          <div class="cards-wrapper" data-aos="fade-left">
-            <cards-collection idStart="1" idEnd="10" method="callbacks"></cards-collection>
+      <main class="main">
+        <section class="cards-section" id="callbacks">
+          <h2 class="cards-section-title"  data-aos="fade-left">Callbacks</h2>
+          <div class="cards-wrapper">
+            <cards-collection idStart="1" idEnd="10" method="callbacks"  data-aos="fade-up"></cards-collection>
           </div>
         </section>
         <section class="cards-section" id="promises">
-          <h2 class="cards-section-title" >Promises</h2>
+          <h2 class="cards-section-title"   data-aos="fade-left">Promises</h2>
           <div class="cards-wrapper">
-            <cards-collection idStart="11" idEnd="20" method="promises"></cards-collection>
+            <cards-collection idStart="11" idEnd="20" method="promises"  data-aos="fade-up"></cards-collection>
           </div>
         </section>
         <section class="cards-section" id="async-await">
-          <h2 class="cards-section-title">Async/Await</h2>
+          <h2 class="cards-section-title"  data-aos="fade-left">Async/Await</h2>
           <div class="cards-wrapper">
-            <cards-collection idStart="21" idEnd="30" method="async-await"></cards-collection>
+            <cards-collection idStart="21" idEnd="30" method="async-await"  data-aos="fade-up"></cards-collection>
           </div>
         </section>
       </main>
