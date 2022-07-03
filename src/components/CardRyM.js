@@ -30,6 +30,8 @@ class CardRyM extends HTMLElement {
       border-radius: 20px 20px 0 0;
       background-color: #3E3A3A;
       text-align: center;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.75);
+
     }
 
     .image-wrapper {
@@ -57,6 +59,7 @@ class CardRyM extends HTMLElement {
       justify-content: space-around;
       background-color: #fff;
       border: 2px solid #000;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.75);
     }
 
     .character-name {
