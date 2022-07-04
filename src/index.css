@@ -83,11 +83,6 @@ body {
   margin-top: 30px;
 }
 
-/* scroll-nav styles */
-.scroll-nav {
-  /* background-color: papayawhip; */
-}
-
 /* styles for the main where teh cards are */
 
 .main {
@@ -125,4 +120,18 @@ body {
 
 .cards-wrapper {
   margin: 30px 0;
+}
+
+@media screen and (min-width: 1024px) {
+  /* styles for the desktop view */
+  .header .title {
+    font-size: 4rem;
+    padding: 15px;
+  }
+
+  .header .ship-vector {
+    width: 86px;
+    height: 86px;
+    left: calc(50% - 86px);
+  }
 }

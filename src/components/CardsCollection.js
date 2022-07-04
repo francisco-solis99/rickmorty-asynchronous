@@ -23,6 +23,12 @@ class CardsCollection extends HTMLElement {
         gap: 30px 0;
       }
     }
+
+    @media screen and (min-width: 1024px) {
+      .collection {
+        gap: 50px 10px;
+      }
+    }
   `;
   }
 
