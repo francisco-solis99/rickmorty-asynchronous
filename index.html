@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rick and Morty</title>
+  
+  
+  <script type="module" crossorigin src="/rickmorty-asynchronous/index.b1de526a.js"></script>
+  <link rel="stylesheet" href="/rickmorty-asynchronous/index.156cc7db.css">
+</head>
+<body>
+  <div id="app">
+    <header class="header" data-aos="fade-up">
+      <h1 class="title">Rick and Morty API</h1>
+      <img class="ship-vector" src="/rickmorty-asynchronous/ship.1cdcf076.svg" alt="Ship vector 24x24">
+    </header>
+
+    <section class="content">
+      <aside class="scroll-nav"  data-aos="fade-right">
+        <spy-scroll></spy-scroll>
+      </aside>
+      <main class="main">
+        <section class="cards-section" id="callbacks">
+          <h2 class="cards-section-title"  data-aos="fade-left">Callbacks</h2>
+          <div class="cards-wrapper">
+            <cards-collection idStart="1" idEnd="10" method="callbacks"  data-aos="fade-up"></cards-collection>
+          </div>
+        </section>
+        <section class="cards-section" id="promises">
+          <h2 class="cards-section-title"   data-aos="fade-left">Promises</h2>
+          <div class="cards-wrapper">
+            <cards-collection idStart="11" idEnd="20" method="promises"  data-aos="fade-up"></cards-collection>
+          </div>
+        </section>
+        <section class="cards-section" id="async-await">
+          <h2 class="cards-section-title"  data-aos="fade-left">Async/Await</h2>
+          <div class="cards-wrapper">
+            <cards-collection idStart="21" idEnd="30" method="async-await"  data-aos="fade-up"></cards-collection>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+</body>
+</html>
