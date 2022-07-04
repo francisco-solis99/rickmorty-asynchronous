@@ -145,7 +145,7 @@ const ea=function(){const r=document.createElement("link").relList;if(r&&r.suppo
             <p>${r.status}</p>
             </div>
           <div class="character-tag">
-            <img class="planet-icon" src="../assets/icons/planet.svg"></img>
+            <img class="planet-icon" src="./src/assets/icons/planet.svg"></img>
             <p>${r.location.name}</p>
           </div>
         </div>
