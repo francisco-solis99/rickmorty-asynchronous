@@ -221,11 +221,7 @@ class CardRyM extends HTMLElement {
             <p>${characterData.status}</p>
             </div>
           <div class="character-tag">
-<<<<<<< HEAD
             <img class="planet-icon" src="./origin.svg"></img>
-=======
-            <img class="planet-icon" src="./assets/icons/origin.svg"></img>
->>>>>>> 13f61c54360c7ab4d5be5fe5e3059ef39663834f
             <p>${characterData.location.name}</p>
           </div>
         </div>
